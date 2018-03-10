@@ -12,6 +12,7 @@
         <module>springmvc-multiservlet</module>
         <module>druid</module>
         <module>myMVC</module>
+        <module>mybatis-pages</module>
     </modules>
 
     <build>
