@@ -1,4 +1,4 @@
-package com.lzumetal.mybatispages.entity.po;
+package com.lzumetal.mybatispages.entity.common;
 
 public class PageInfo {
 

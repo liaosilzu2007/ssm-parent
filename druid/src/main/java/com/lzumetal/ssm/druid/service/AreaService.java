@@ -27,7 +27,7 @@ public class AreaService {
         for (Area outerArea : areas) {
             boolean flag = true;
             for (Area innerArea : areas) {
-                if (Objects.equals(innerArea.(), outerArea.getFpcode())) {
+                if (Objects.equals(innerArea.getFcode(), outerArea.getFpcode())) {
                     outerArea.getAreas().add(innerArea);
                     flag = false;
                 }

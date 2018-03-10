@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lzumetal.ssm.druid.mapper.BookMapper">
-    <resultMap id="BaseResultMap" type="Book">
-        <result column="id" jdbcType="INTEGER" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="author" jdbcType="VARCHAR" property="author"/>
-        <result column="price" jdbcType="DOUBLE" property="price"/>
+
+<mapper namespace="User">
+
+    <resultMap id="BaseResultMap" type="com.ddcx.springboot.User">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="uid" jdbcType="BIGINT" property="uid" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+        <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="realname" jdbcType="VARCHAR" property="realname" />
+        <result column="passport_type" jdbcType="TINYINT" property="passportType" />
+        <result column="passport_id" jdbcType="VARCHAR" property="passportId" />
+        <result column="balance" jdbcType="DECIMAL" property="balance" />
+        <result column="is_authentication" jdbcType="TINYINT" property="isAuthentication" />
+        <result column="is_new" jdbcType="TINYINT" property="isNew" />
+        <result column="pledge" jdbcType="TINYINT" property="pledge" />
+        <result column="pledge_fee" jdbcType="INTEGER" property="pledgeFee" />
+        <result column="recover_time" jdbcType="TIMESTAMP" property="recoverTime" />
+        <result column="manual_refund_pledge" jdbcType="INTEGER" property="manualRefundPledge" />
     </resultMap>
-    <insert id="insert" parameterType="Book">
-    insert into book (id, name, author, 
-      price)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DOUBLE})
-  </insert>
-    <select id="selectAll" resultMap="BaseResultMap">
-    select id, name, author, price
-    from book
-  </select>
-    <select id="getById" resultMap="BaseResultMap">
-    select id, name, author, price
-    from book
-    WHERE id = #{id}
-  </select>
+
+    <
+
 </mapper>

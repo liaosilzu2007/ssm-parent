@@ -13,6 +13,7 @@
 
     <properties>
         <spring.version>4.3.9.RELEASE</spring.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
