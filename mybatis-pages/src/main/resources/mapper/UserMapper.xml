@@ -3,27 +3,33 @@
 
 <mapper namespace="User">
 
-    <resultMap id="BaseResultMap" type="com.ddcx.springboot.User">
-        <result column="id" jdbcType="BIGINT" property="id" />
-        <result column="uid" jdbcType="BIGINT" property="uid" />
-        <result column="username" jdbcType="VARCHAR" property="username" />
-        <result column="password" jdbcType="VARCHAR" property="password" />
-        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-        <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-        <result column="status" jdbcType="TINYINT" property="status" />
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="realname" jdbcType="VARCHAR" property="realname" />
-        <result column="passport_type" jdbcType="TINYINT" property="passportType" />
-        <result column="passport_id" jdbcType="VARCHAR" property="passportId" />
-        <result column="balance" jdbcType="DECIMAL" property="balance" />
-        <result column="is_authentication" jdbcType="TINYINT" property="isAuthentication" />
-        <result column="is_new" jdbcType="TINYINT" property="isNew" />
-        <result column="pledge" jdbcType="TINYINT" property="pledge" />
-        <result column="pledge_fee" jdbcType="INTEGER" property="pledgeFee" />
-        <result column="recover_time" jdbcType="TIMESTAMP" property="recoverTime" />
-        <result column="manual_refund_pledge" jdbcType="INTEGER" property="manualRefundPledge" />
+    <resultMap id="BaseResultMap" type="com.lzumetal.mybatispages.entity.po.User">
+        <result column="id" jdbcType="BIGINT" property="id" javaType="Long"/>
+        <result column="uid" jdbcType="BIGINT" property="uid" javaType="Long"/>
+        <result column="username" jdbcType="VARCHAR" property="username" javaType="String"/>
+        <result column="password" jdbcType="VARCHAR" property="password" javaType="String"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar" javaType="String"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="realname" jdbcType="VARCHAR" property="realname"/>
+        <result column="passport_type" jdbcType="TINYINT" property="passportType"/>
+        <result column="passport_id" jdbcType="VARCHAR" property="passportId"/>
+        <result column="balance" jdbcType="DECIMAL" property="balance"/>
+        <result column="is_authentication" jdbcType="TINYINT" property="isAuthentication"/>
+        <result column="is_new" jdbcType="TINYINT" property="isNew"/>
+        <result column="pledge" jdbcType="TINYINT" property="pledge"/>
+        <result column="pledge_fee" jdbcType="INTEGER" property="pledgeFee"/>
+        <result column="recover_time" jdbcType="TIMESTAMP" property="recoverTime"/>
+        <result column="manual_refund_pledge" jdbcType="INTEGER" property="manualRefundPledge"/>
     </resultMap>
 
-    <
+    <select id="select" parameterType="Map" resultType="com.lzumetal.mybatispages.entity.po.User">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="list" parameterType="Map" resultMap="BaseResultMap">
+        select * from user where id <![CDATA[<]]> #{id}
+    </select>
 
 </mapper>

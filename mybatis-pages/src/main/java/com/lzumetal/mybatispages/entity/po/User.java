@@ -174,4 +174,28 @@ public class User {
     public void setManualRefundPledge(Integer manualRefundPledge) {
         this.manualRefundPledge = manualRefundPledge;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", username='" + username + '\'' +
+                ", realname='" + realname + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", isAuthentication=" + isAuthentication +
+                ", isNew=" + isNew +
+                ", passportType=" + passportType +
+                ", passportId='" + passportId + '\'' +
+                ", balance=" + balance +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                ", pledge=" + pledge +
+                ", pledgeFee=" + pledgeFee +
+                ", createTime=" + createTime +
+                ", recoverTime=" + recoverTime +
+                ", manualRefundPledge=" + manualRefundPledge +
+                '}';
+    }
 }

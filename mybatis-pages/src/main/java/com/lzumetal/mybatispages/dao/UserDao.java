@@ -4,6 +4,7 @@ import com.lzumetal.mybatispages.entity.po.User;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,17 +22,20 @@ import java.util.Map;
 public class UserDao {
 
     @Autowired
-    private SqlSession sqlSession;
+    private SqlSessionTemplate sqlSession;
 
-    @MapKey("id")
+    /*
+    将查询出来的记过封装成一个map，map的key可以指定为某个字段，比如id；map的value是查询出来的对象
+     */
     public Map<Long, User> getById(Long id) {
         Map<String, Object> params = new HashMap<>();
         params.put("id", id);
-        return sqlSession.selectOne("User.select", params);
+        return sqlSession.selectMap("User.select", params, "id");
     }
 
-    public List<User> list() {
-
+    public List<User> list(Long id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
         return sqlSession.selectList("User.list");
     }
 

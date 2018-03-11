@@ -58,10 +58,10 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.lzumetal.ssm.druid.mapper"/>
+<!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lzumetal.mybatispages.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"/>
-    </bean>
+    </bean>-->
 
 
 

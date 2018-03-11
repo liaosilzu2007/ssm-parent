@@ -24,7 +24,7 @@ public class UserService {
         return userDao.getById(id);
     }
 
-    public List<User> list(int pageNo, int pageSize) {
-        return userDao.list();
+    public List<User> list(Long id) {
+        return userDao.list(id);
     }
 }
