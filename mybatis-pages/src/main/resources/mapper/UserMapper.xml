@@ -25,11 +25,14 @@
     </resultMap>
 
     <select id="select" parameterType="Map" resultType="com.lzumetal.mybatispages.entity.po.User">
-        select * from user where id = #{id}
+        SELECT * FROM `user` WHERE id = #{id}
     </select>
 
     <select id="list" parameterType="Map" resultMap="BaseResultMap">
-        select * from user where id <![CDATA[<]]> #{id}
+        SELECT * FROM `user` WHERE id <![CDATA[<]]> #{id}
     </select>
 
+    <select id="getByPage" parameterType="Map" resultMap="BaseResultMap">
+        SELECT * FROM `user` WHERE create_time > DATE_FORMAT(#{queryDay}, '%Y-%m-%d')
+    </select>
 </mapper>

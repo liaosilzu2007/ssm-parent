@@ -5,6 +5,7 @@ import com.lzumetal.mybatispages.entity.po.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,4 +28,14 @@ public class UserService {
     public List<User> list(Long id) {
         return userDao.list(id);
     }
+
+    public List<User> getByPage(String queryDay, int pageNo, int pageSize) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("queryDay", queryDay);
+        paramMap.put("pageNo", pageNo);
+        paramMap.put("pageSize", pageSize);
+        return userDao.getByPage(paramMap);
+
+    }
+
 }

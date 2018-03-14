@@ -39,5 +39,10 @@ public class UserDao {
         return sqlSession.selectList("User.list");
     }
 
+    public List<User> getByPage(Map<String, Object> paramMap) {
+        return sqlSession.selectList("User.getByPage", paramMap);
+    }
+
+
 
 }

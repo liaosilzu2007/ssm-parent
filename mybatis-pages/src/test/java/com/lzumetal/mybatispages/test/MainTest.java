@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -34,9 +35,15 @@ public class MainTest {
     }
 
     @Test
-    public void test2() {
+    public void testReturnMap() {
         Map<Long, User> map = userService.getById(10L);
         System.out.println(map);
+    }
+
+    @Test
+    public void testPagination() {
+        List<User> users = userService.getByPage("2017-05-01",1, 10);
+        System.out.println(gson.toJson(users));
     }
 
 

@@ -10,5 +10,10 @@
     <typeAliases>
         <package name="com.lzumetal.mybatispages.entity.po"/>
     </typeAliases>
+    <plugins>
+        <plugin interceptor="com.lzumetal.mybatispages.interceptor.PageInterceptor">
+            <property name="dbType" value="mysql"/>
+        </plugin>
+    </plugins>
 
 </configuration>
