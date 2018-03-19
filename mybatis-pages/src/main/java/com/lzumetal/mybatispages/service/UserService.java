@@ -2,6 +2,8 @@ package com.lzumetal.mybatispages.service;
 
 import com.lzumetal.mybatispages.dao.UserDao;
 import com.lzumetal.mybatispages.entity.User;
+import com.lzumetal.mybatispages.entity.UserParam;
+import com.lzumetal.mybatispages.page.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +31,10 @@ public class UserService {
         return userDao.list(id);
     }
 
-    public List<User> getByPage(String queryDay, int currentPage, int pageSize) {
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("queryDay", queryDay);
-        paramMap.put("currentPage", currentPage);
-        paramMap.put("pageSize", pageSize);
-        return userDao.getByPage(paramMap);
-
+    public Pagination<User> getByPage(String createdStart, int currentPage, int pageSize) {
+        UserParam userParam = new UserParam();
+        userParam.setCreatedStart(createdStart);
+        return userDao.getByPage(userParam, currentPage, pageSize);
     }
 
 }

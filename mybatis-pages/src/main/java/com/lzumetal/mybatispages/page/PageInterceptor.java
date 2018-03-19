@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Future;
@@ -97,36 +99,41 @@ public class PageInterceptor implements Interceptor {
             //获取进行数据库操作时管理参数的handler
             ParameterHandler parameterHandler = (ParameterHandler) MetaObjectHandler.getValue("delegate.parameterHandler");
             //获取请求时的参数
-            Map<String, Object> paraObject = (Map<String, Object>) parameterHandler.getParameterObject();
+            Map<String, Object> paramMap = (Map<String, Object>) parameterHandler.getParameterObject();
             //也可以这样获取
-            //paraObject = (Map<String, Object>) statementHandler.getBoundSql().getParameterObject();
+            //paramMap = (Map<String, Object>) statementHandler.getBoundSql().getParameterObject();
 
             //参数名称和在service中设置到map中的名称一致
-            int currentPage = (int) paraObject.get("currentPage");
-            int pageSize = (int) paraObject.get("pageSize");
-            Pagination pagination = new Pagination(currentPage, pageSize);
+            Pagination pagination = (Pagination) paramMap.get("pagination");
 
-            BoundSql boundSql = (BoundSql) MetaObjectHandler.getValue("delegate.boundSql");
             String sql = (String) MetaObjectHandler.getValue("delegate.boundSql.sql");
             //也可以通过statementHandler直接获取
             //sql = statementHandler.getBoundSql().getSql();
 
+            String countSql = changeToCountSql(sql);
+            // 同jdbc一个流程查询sql语句
+            Connection connection = (Connection) invocation.getArgs()[0];
+            PreparedStatement preparedStatement = connection.prepareStatement(countSql);
+            // 为了先查询总条数，所以需要先统计原始sql结果，但是原始sql中参数还没赋值，所以就需要先拿到原始sql的参数处理对象，通过反射工具
+            parameterHandler.setParameters(preparedStatement);
+            // 参数被设置以后，直接执行sql语句得到结果集合
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                // 将查询到的结果集合设置到pagination中
+                pagination.setTotalCount(resultSet.getInt(1));
+                pagination.setTotalPage(pagination.getTotalPageCount());
+                pagination.refresh();
+            }
+
             //获取具体的分页实现
             Dialect dialect = DialectFactory.createDialect(dialectName);
             String limitSql = dialect.changeToPageSql(sql, pagination);
-
             // 采用物理分页后，就不需要mybatis的内存分页了，所以可以把rowBounds的偏移量恢复为初始值(offet:0,limit:Integer.max)
 //            MetaObjectHandler.setValue("delegate.rowBounds.offset", RowBounds.NO_ROW_OFFSET);
 //            MetaObjectHandler.setValue("delegate.rowBounds.limit", RowBounds.NO_ROW_LIMIT);
 
             //将构建完成的分页sql语句赋值个体'delegate.boundSql.sql'，偷天换日
             MetaObjectHandler.setValue("delegate.boundSql.sql", limitSql);
-
-            //新启线程计算totalCount，新线程执行完成后，page对象的totalCount已经设置好，新线程未执行完之前，page.getTotalCount()将阻塞
-            PageCountTask task = new PageCountTask(sql, pagination, mappedStatement, boundSql, dataSource);
-            Future futureResult = ExecutorUtil.submit(task);
-            pagination.setFutureResult(futureResult);
-            logger.warn(new Gson().toJson(pagination));
         }
 
         //调用原对象的方法，进入责任链的下一级（将执行权交给下一个拦截器）
@@ -151,8 +158,8 @@ public class PageInterceptor implements Interceptor {
 
     }
 
-    private String changeToCountSql(String sql) {
-
+    private String changeToCountSql(String originalSql) {
+        return "SELECT COUNT(0) FROM (" + originalSql + ") ALIAS";
     }
 
 

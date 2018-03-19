@@ -38,12 +38,13 @@ public class UserDao {
         return sqlSession.selectList("User.list");
     }
 
-    public List<User> getByPage(UserParam userParam, int currentPage, int pageSize) {
+    public Pagination<User> getByPage(UserParam userParam, int currentPage, int pageSize) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("userParam", userParam);
         Pagination<User> pagination = new Pagination<>(currentPage, pageSize);
         paramMap.put("pagination", pagination);
-        return sqlSession.selectList("User.getByPage", paramMap);
+        pagination.setData(sqlSession.selectList("User.getByPage", paramMap));
+        return pagination;
     }
 
 

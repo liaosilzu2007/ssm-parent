@@ -19,9 +19,9 @@ public class Pagination<T> implements Serializable {
     private int currentPage;
     private long totalPage;
     private long totalCount;
-    private List<T> data;
     private boolean hasPrevious = false;
     private boolean hasNext = false;
+    private List<T> data;
 
     public Pagination(int currentPage, int pageSize) {
         this.currentPage = currentPage;
@@ -50,7 +50,7 @@ public class Pagination<T> implements Serializable {
     /**
      * 取总页数
      */
-    private final long getTotalPageCount() {
+    public final long getTotalPageCount() {
         if (totalCount % pageSize == 0)
             return totalCount / pageSize;
         else
@@ -60,7 +60,7 @@ public class Pagination<T> implements Serializable {
     /**
      * 刷新当前分页对象数据
      */
-    private void refresh() {
+    public void refresh() {
         if (totalPage <= 1) {
             hasPrevious = false;
             hasNext = false;

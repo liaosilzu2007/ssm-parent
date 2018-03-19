@@ -3,6 +3,7 @@ package com.lzumetal.mybatispages.test;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lzumetal.mybatispages.entity.User;
+import com.lzumetal.mybatispages.page.Pagination;
 import com.lzumetal.mybatispages.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,8 +43,8 @@ public class MainTest {
 
     @Test
     public void testPagination() {
-        List<User> users = userService.getByPage("2017-05-01",1, 10);
-        System.out.println(gson.toJson(users));
+        Pagination<User> userPagination = userService.getByPage("2017-05-01", 1, 10);
+        System.out.println(gson.toJson(userPagination));
     }
 
 
