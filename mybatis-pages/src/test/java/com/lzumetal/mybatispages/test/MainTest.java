@@ -2,7 +2,7 @@ package com.lzumetal.mybatispages.test;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.lzumetal.mybatispages.entity.po.User;
+import com.lzumetal.mybatispages.entity.User;
 import com.lzumetal.mybatispages.service.UserService;
 import org.junit.Before;
 import org.junit.Test;

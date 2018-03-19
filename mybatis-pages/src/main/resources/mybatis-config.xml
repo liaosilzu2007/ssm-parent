@@ -3,6 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <properties>
+        <property name="pageSize" value="20"/>
+    </properties>
     <settings>
         <!-- 打印查询语句 -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
@@ -11,9 +14,11 @@
         <package name="com.lzumetal.mybatispages.entity.po"/>
     </typeAliases>
     <plugins>
-        <plugin interceptor="com.lzumetal.mybatispages.interceptor.PageInterceptor">
-            <property name="dbType" value="mysql"/>
+        <plugin interceptor="com.lzumetal.mybatispages.page.PageInterceptor">
+            <!--这个拦截器的 setProperties() 方法中可以获取此处配置的属性-->
+            <property name="dialectName" value="mysql"/>
         </plugin>
     </plugins>
+
 
 </configuration>

@@ -1,9 +1,8 @@
 package com.lzumetal.mybatispages.dao;
 
-import com.lzumetal.mybatispages.entity.po.User;
-import org.apache.ibatis.annotations.MapKey;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.session.SqlSession;
+import com.lzumetal.mybatispages.entity.User;
+import com.lzumetal.mybatispages.entity.UserParam;
+import com.lzumetal.mybatispages.page.Pagination;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,7 +38,11 @@ public class UserDao {
         return sqlSession.selectList("User.list");
     }
 
-    public List<User> getByPage(Map<String, Object> paramMap) {
+    public List<User> getByPage(UserParam userParam, int currentPage, int pageSize) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userParam", userParam);
+        Pagination<User> pagination = new Pagination<>(currentPage, pageSize);
+        paramMap.put("pagination", pagination);
         return sqlSession.selectList("User.getByPage", paramMap);
     }
 

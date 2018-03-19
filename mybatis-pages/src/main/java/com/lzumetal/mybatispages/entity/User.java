@@ -1,4 +1,4 @@
-package com.lzumetal.mybatispages.entity.po;
+package com.lzumetal.mybatispages.entity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;

@@ -3,7 +3,7 @@
 
 <mapper namespace="User">
 
-    <resultMap id="BaseResultMap" type="com.lzumetal.mybatispages.entity.po.User">
+    <resultMap id="BaseResultMap" type="com.lzumetal.mybatispages.entity.User">
         <result column="id" jdbcType="BIGINT" property="id" javaType="Long"/>
         <result column="uid" jdbcType="BIGINT" property="uid" javaType="Long"/>
         <result column="username" jdbcType="VARCHAR" property="username" javaType="String"/>
@@ -24,7 +24,7 @@
         <result column="manual_refund_pledge" jdbcType="INTEGER" property="manualRefundPledge"/>
     </resultMap>
 
-    <select id="select" parameterType="Map" resultType="com.lzumetal.mybatispages.entity.po.User">
+    <select id="select" parameterType="Map" resultType="com.lzumetal.mybatispages.entity.User">
         SELECT * FROM `user` WHERE id = #{id}
     </select>
 
@@ -33,6 +33,6 @@
     </select>
 
     <select id="getByPage" parameterType="Map" resultMap="BaseResultMap">
-        SELECT * FROM `user` WHERE create_time > DATE_FORMAT(#{queryDay}, '%Y-%m-%d')
+        SELECT * FROM `user` WHERE create_time > DATE_FORMAT(#{userParam.createdStart}, '%Y-%m-%d')
     </select>
 </mapper>
