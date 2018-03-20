@@ -21,7 +21,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.Future;
 
 import static com.lzumetal.mybatispages.page.PageConfig.MYSQL_DIALECT;
 

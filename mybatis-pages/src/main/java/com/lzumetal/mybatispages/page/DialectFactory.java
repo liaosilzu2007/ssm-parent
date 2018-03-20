@@ -10,6 +10,6 @@ public class DialectFactory {
         } else if (PageConfig.MYSQL_DIALECT.equals(dialectName)) {
             return new MySQLDialect();
         }
-        throw new RestException("DialectFactory.createDialect method error: diealectName is invalid");
+        throw new RestException("Dialect create failed: diealectName is invalid, the dialectName = " + dialectName);
     }
 }
