@@ -43,7 +43,7 @@ public class UserDao {
         paramMap.put("userParam", userParam);
         Pagination<User> pagination = new Pagination<>(currentPage, pageSize);
         paramMap.put("pagination", pagination);
-        pagination.setData(sqlSession.selectList("User.getByPage", paramMap));
+        pagination.setData(sqlSession.selectList("User.get", paramMap));
         return pagination;
     }
 

@@ -13,6 +13,7 @@
         <module>druid</module>
         <module>myMVC</module>
         <module>mybatis-pages</module>
+        <module>param-check</module>
     </modules>
 
     <build>

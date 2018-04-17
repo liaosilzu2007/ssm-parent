@@ -32,7 +32,7 @@
         SELECT * FROM `user` WHERE id <![CDATA[<]]> #{id}
     </select>
 
-    <select id="getByPage" parameterType="Map" resultMap="BaseResultMap">
+    <select id="get" parameterType="Map" resultMap="BaseResultMap">
         SELECT * FROM `user` WHERE create_time > DATE_FORMAT(#{userParam.createdStart}, '%Y-%m-%d')
     </select>
 </mapper>
