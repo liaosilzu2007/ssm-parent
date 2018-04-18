@@ -7,8 +7,8 @@ public class StudentParam {
 
     @NotNull
     private Integer id;
-    @NotEmpty
     private Integer age;
+    @NotEmpty
     private String name;
 
 

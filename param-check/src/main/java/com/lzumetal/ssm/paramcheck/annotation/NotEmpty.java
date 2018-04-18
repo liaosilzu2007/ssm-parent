@@ -8,4 +8,5 @@ import java.lang.annotation.*;
 public @interface NotEmpty {
 
     String msg() default "字段不能为空";
+
 }
