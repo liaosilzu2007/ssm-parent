@@ -29,7 +29,10 @@ public class ParamCheckAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Parameter[] parameters = signature.getMethod().getParameters();
         for (Parameter parameter : parameters) {
-            //没有标注@ValidParam注解或者不是自定义类型的参数，不做处理
+            /*
+             * 没有标注@ValidParam注解，或者不是自定义类型的参数（例如Integer、String），
+             * 或者是HttpServletRequest、HttpServletResponse、HttpSession时，都不做处理
+            */
             if (parameter.getType().isAssignableFrom(HttpServletRequest.class) || parameter.getType().isAssignableFrom(HttpSession.class) ||
                     parameter.getType().isAssignableFrom(HttpServletResponse.class) || parameter.getAnnotation(ValidParam.class) == null ||
                     parameter.getType().getClassLoader() == null) {
@@ -38,17 +41,19 @@ public class ParamCheckAspect {
             Class<?> paramClazz = parameter.getType();
             //获取类型所对应的参数对象
             Object arg = Arrays.stream(args).filter(i -> paramClazz.isAssignableFrom(i.getClass())).findFirst().get();
+            //得到参数的所有成员变量
             Field[] declaredFields = paramClazz.getDeclaredFields();
-            Object fieldValue;
             for (Field field : declaredFields) {
                 field.setAccessible(true);
+                //校验标有@NotNull注解的字段
                 NotNull notNull = field.getAnnotation(NotNull.class);
                 if (notNull != null) {
-                    fieldValue = field.get(arg);
+                    Object fieldValue = field.get(arg);
                     if (fieldValue == null) {
                         throw new RuntimeException(field.getName() + notNull.msg());
                     }
                 }
+                //校验标有@NotEmpty注解的字段
                 NotEmpty notEmpty = field.getAnnotation(NotEmpty.class);
                 if (notEmpty != null) {
                     if (!String.class.isAssignableFrom(field.getType())) {
@@ -60,13 +65,7 @@ public class ParamCheckAspect {
                     }
                 }
             }
-
-
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(HttpServletRequest.class.getClassLoader() == null);
     }
 
 

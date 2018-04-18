@@ -19,5 +19,6 @@
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
 
+    <!--自动为spring容器中配置@Aspect切面的bean创建代理，织入切面。-->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 </beans>
