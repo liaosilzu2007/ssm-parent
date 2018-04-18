@@ -1,11 +1,13 @@
 package com.lzumetal.ssm.paramcheck.requestParam;
 
+import com.lzumetal.ssm.paramcheck.annotation.NotEmpty;
 import com.lzumetal.ssm.paramcheck.annotation.NotNull;
 
 public class StudentParam {
 
     @NotNull
     private Integer id;
+    @NotEmpty
     private Integer age;
     private String name;
 
