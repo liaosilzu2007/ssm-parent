@@ -14,8 +14,12 @@ public class CacheService {
 
     @Async
     public void cacheData() {
-        TimeUnit.SECONDS.sleep(5L);
-        System.out.println("");
+        try {
+            TimeUnit.SECONDS.sleep(5L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("store the result to cache");
     }
 
 }
