@@ -24,7 +24,7 @@ public class UserDao {
     private SqlSessionTemplate sqlSession;
 
     /*
-    将查询出来的记过封装成一个map，map的key可以指定为某个字段，比如id；map的value是查询出来的对象
+     * 将查询出来的记过封装成一个map，map的key可以指定为某个字段，比如id；map的value是查询出来的对象
      */
     public Map<Long, User> getById(Long id) {
         Map<String, Object> params = new HashMap<>();
@@ -35,7 +35,7 @@ public class UserDao {
     public List<User> list(Long id) {
         Map<String, Object> params = new HashMap<>();
         params.put("id", id);
-        return sqlSession.selectList("User.list");
+        return sqlSession.selectList("User.list", params);
     }
 
     public Pagination<User> getByPage(UserParam userParam, int currentPage, int pageSize) {
