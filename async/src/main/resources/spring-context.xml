@@ -10,8 +10,10 @@
        http://www.springframework.org/schema/task
        http://www.springframework.org/schema/task/spring-task.xsd">
 
+    <!-- 包扫描 -->
     <context:component-scan base-package="com.lzumetal.ssm"/>
 
+    <!-- 执行异步任务的线程池TaskExecutor -->
     <task:executor id="myexecutor" pool-size="5"  />
     <task:annotation-driven executor="myexecutor"/>
 

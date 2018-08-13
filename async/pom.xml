@@ -23,6 +23,14 @@
             <version>4.12</version>
         </dependency>
 
+        <!-- 日志     start-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+        <!-- 日志     end-->
+
         <!-- Spring     start-->
         <!-- Spring package dependency -->
         <dependency>
