@@ -14,7 +14,8 @@
         <module>myMVC</module>
         <module>mybatis-pages</module>
         <module>param-check</module>
-        <module>anotation-test</module>
+        <module>async</module>
+        <module>log</module>
     </modules>
 
     <build>

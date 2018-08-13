@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>anotation-test</artifactId>
+    <artifactId>async</artifactId>
 
 
     <properties>
