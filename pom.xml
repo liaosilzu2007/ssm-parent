@@ -16,6 +16,7 @@
         <module>param-check</module>
         <module>async</module>
         <module>log</module>
+        <module>interface-test</module>
     </modules>
 
     <build>
